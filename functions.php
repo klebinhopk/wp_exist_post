@@ -5,21 +5,30 @@
 	 * @global class $wpdb
 	 *
 	 * @str $title return title post
-	 * @str $author ID number of author post
-	 * @str $post_type default post or other
+	 * @str $author ID number of author post and no required
+	 * @str $post_type no required and default post or other
 	 *
 	 **/
-	function wp_exist_post($title = NULL, $author = '1', $post_type='post') {
+	function wp_exist_post( $title = '', $author = '', $post_type='post' ) {
 		global $wpdb;
-		if(empty(trim($title)))
+		if( empty( trim( $title ) ) )
 			return NULL;
 
-		$title = urldecode($title);
-		$arr = array(esc_sql($author), esc_sql($title), esc_sql($post_type));
-		
-		$result = count($wpdb->get_results($wpdb->prepare("SELECT * FROM {$wpdb->posts} WHERE post_author = %d AND post_title = %s AND post_type = %s", $arr)));
+		$title = urldecode( $title );
+		$arr = array( esc_sql( $author ), esc_sql( $title ), esc_sql( $post_type ) );
 
-		if($result >= 1)
+		$sql  = "SELECT * FROM {$wpdb->posts} WHERE ";
+		if( !empty( $author ) ){
+			$arr[] = esc_sql( $author );
+			$sql .= "post_author = %d ";
+		}
+		$arr[] = esc_sql( $title );
+		$arr[] = esc_sql( $post_type );
+		$sql .= " AND post_title = %s AND post_type = %s";
+
+		$result = count( $wpdb->get_results( $wpdb->prepare( $sql, $arr ) ) );
+
+		if($result > 0)
 			return $result;
 
 		return NULL;
