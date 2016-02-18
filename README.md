@@ -8,7 +8,7 @@ $title = "Total Recall - My unbelievably true life story";
 $author = '';
 $post_type = 'ebook';
 
-if(!wp_exist_post($title, $author, $post_type){
+if(!wp_exist_post( $title, $author, $post_type ){
   echo "There, do something!";
 }else{
   echo "Exist!";
