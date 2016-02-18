@@ -4,8 +4,8 @@
 	 * @Version 1.0.0
 	 * @global class $wpdb
 	 *
-	 * @str $title return title post
-	 * @str $author ID number of author post and no required
+	 * @str $title title name post
+	 * @str $author ID number of author post ( no required )
 	 * @str $post_type no required and default post or other
 	 *
 	 **/
@@ -15,7 +15,6 @@
 			return NULL;
 
 		$title = urldecode( $title );
-		$arr = array( esc_sql( $author ), esc_sql( $title ), esc_sql( $post_type ) );
 
 		$sql  = "SELECT * FROM {$wpdb->posts} WHERE ";
 		if( !empty( $author ) ){
