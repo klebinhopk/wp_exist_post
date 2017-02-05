@@ -1,7 +1,8 @@
 <?php
 /**
  * Check Exist Post By Title
- * @Version 1.0.1
+ * @version 1.0.1
+ * @author Lenivene Bezerra
  * @global class $wpdb
  *
  * @str $title title name post
@@ -9,6 +10,7 @@
  * @str $post_type no required and default post or other
  *
  **/
+function wp_post_exists( $title, $author = '', $post_type = 'post' ) {
 	global $wpdb;
 
 	if( empty( $title ) ){
