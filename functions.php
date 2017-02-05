@@ -17,8 +17,6 @@ function wp_post_exists( $title, $author = '', $post_type = 'post' ) {
 		return 0;
 	}
 
-	$title = ( is_object( $title ) ) ? (array) $title : $title;
-
 	$query = "SELECT ID FROM $wpdb->posts WHERE 1=1";
 	$args  = array();
 
